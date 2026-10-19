@@ -1,11 +1,12 @@
 import streamlit as st
 import random
 import string
+import re
 
 # إعدادات المتصفح الأساسية
 st.set_page_config(page_title="منصة Panda Security التفاعلية", page_icon="🐼", layout="centered")
 
-# تخصيص واجهة المستخدم بتدرج نيون من الأخضر إلى الوردي
+# تخصيص واجهة المستخدم بتدرج نيون من الأخضر إلى الوردي مع تباين عالي للخانات
 st.markdown("""
     <style>
     /* خلفية متدرجة نيون ممتعة من الأخضر إلى الوردي */
@@ -37,12 +38,12 @@ st.markdown("""
     /* تنسيق التبويبات العلوية لتبرز بوضوح ممتع */
     .stTabs [data-baseweb="tab"] {
         color: #ffffff;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         background-color: rgba(18, 14, 46, 0.85);
         border-radius: 12px 12px 0px 0px;
-        padding: 12px 24px;
-        margin: 0px 4px;
+        padding: 10px 18px;
+        margin: 0px 3px;
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
@@ -57,17 +58,17 @@ st.markdown("""
     }
     
     /* تنسيق حقول الإدخال لتكون واضحة وداكنة ومتباينة */
-    div[data-baseweb="input"] {
+    div[data-baseweb="input"], div[data-baseweb="textarea"] {
         background-color: rgba(18, 14, 46, 0.9) !important;
         border: 2px solid #120e2e !important;
         border-radius: 12px;
     }
     
-    input {
+    input, textarea {
         color: #ffffff !important;
     }
     
-    /* تنسيق الخانات والبطاقات الداخلية لزيادة التباين العالي عن الخلفية الخارجية */
+    /* تنسيق الخانات والبطاقات الداخلية */
     .stSelectbox, .stRadio {
         background-color: rgba(18, 14, 46, 0.85) !important;
         padding: 15px;
@@ -105,20 +106,62 @@ st.markdown("""
 
 # واجهة تطبيق Panda Security الرئيسية
 st.markdown("<h1>🐼 Panda Security 🐼</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>منصة تفاعلية ممتعة للتحقق من أمان وفحص البيانات الرقمية</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>منصة التحقق الذكي وفحص الروابط والأكواد والمخاطر السيبرانية</p>", unsafe_allow_html=True)
 
 # لوحة معلومات توضيحية شفافة
-st.markdown('<div style="background-color: rgba(18, 14, 46, 0.85); padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">👾 <b>مرحباً بك في نظام الفحص والتحقق!</b> استخدم التبويبات بالأسفل للتحقق من سلامة كلمات مرورك وتشفير بياناتك السرية.</div>', unsafe_allow_html=True)
+st.markdown('<div style="background-color: rgba(18, 14, 46, 0.85); padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">👾 <b>مختبر الباندا السيبراني:</b> أصبح بإمكانك الآن فحص الروابط والأكواد البرمجية المشبوهة بجانب فحص كلمات المرور وتشفير النصوص!</div>', unsafe_allow_html=True)
 
-# التبويبات التفاعلية للتحقق من الأمان
-tab1, tab2, tab3 = st.tabs(["🔍 فحص أمان كلمات المرور", "🔑 مصنع الرموز القوية", "🔒 نظام تشفير البيانات"])
+# التبويبات التفاعلية الأربعة
+tab1, tab2, tab3, tab4 = st.tabs(["🛡️ فحص الروابط والأكواد", "🔍 فحص كلمات المرور", "🔑 مصنع الرموز", "🔒 نظام التشفير"])
 
-# 1. قسم التحقق وفحص كلمة المرور
+# 1. التبويب الجديد: أداة فحص وتحليل الروابط والأكواد المشبوهة
 with tab1:
-    st.markdown("<h3 style='color: #120e2e; font-weight: bold;'>🛡️ مختبر القوة وتحليل الحسابات</h3>", unsafe_allow_html=True)
-    st.write("اكتب كلمة مرور هنا ودع نظام التحقق يقيس مستوى حمايتها:")
+    st.markdown("<h3 style='color: #120e2e; font-weight: bold;'>🛡️ رادار فحص الروابط والأكواد المشبوهة</h3>", unsafe_allow_html=True)
+    st.write("الصق الرابط أو الكود البرمجي المشكوك فيه، وسيقوم محرك الباندا بالتحقق من سلامته فوراً:")
     
-    password = st.text_input("ادخل الكلمة المراد فحصها:", type="password", key="panda_gradient_pwd", placeholder="اكتب كلمتك السرية هنا...")
+    # اختيار نوع الفحص
+    scan_type = st.radio("اختر نوع المادة المراد تحليلها:", ["رابط ويب (URL)", "كود برمجي (Code)"])
+    
+    if scan_type == "رابط ويب (URL)":
+        user_url = st.text_input("أدخل رابط الموقع الإلكتروني لفحصه:", placeholder="مثال: http://free-gifts-claim.net")
+        
+        if st.button("🚨 ابدأ فحص الرابط سيبرانياً"):
+            if user_url:
+                # خوارزمية محاكاة لفحص الروابط الوهمية والتصيد
+                suspicious_words = ["free", "gift", "login-secure", "win", "money", "update-account", "prize", "claim"]
+                is_suspicious = any(word in user_url.lower() for word in suspicious_words) or "http://" in user_url.lower()
+                
+                if is_suspicious:
+                    st.error("🚨 **تحذير عالي الخطورة!** هذا الرابط يحمل مؤشرات تصيد احتيالي (Phishing) أو برمجيات خبيثة! ينصح بعدم النقر عليه.")
+                    st.info("💡 **تحليل الباندا:** الرابط يحتوي على كلمات مشبوهة أو لا يستخدم بروتوكول التشفير الآمن HTTPS.")
+                else:
+                    st.success("✅ **الرابط يبدو آمناً!** لم يتم العثور على أنماط اختراق أو تصيد واضحة في بنية الرابط.")
+                    st.balloons()
+            else:
+                st.warning("الرجاء إدخال الرابط أولاً!")
+                
+    else:
+        user_code = st.text_area("الصق الكود البرمجي هنا لتحليله:", placeholder="اكتب أو الصق الكود البرمجي هنا...", height=150)
+        
+        if st.button("⚙️ ابدأ التحليل البرمجي الخبير"):
+            if user_code:
+                # الكلمات الدلالية للأكواد الخبيثة والمخترقة
+                malicious_patterns = ["eval\(", "base64_decode", "os.system", "rm -rf", "subprocess", "keylogger", "steal_data"]
+                detected_threats = [pattern for pattern in malicious_patterns if re.search(pattern, user_code)]
+                
+                if detected_threats:
+                    st.error(f"🚨 **تم اكتشاف كود مشبوه!** يحتوي الكود على دوال أو أوامر خطيرة قد تُستخدم لتنفيذ أوامر ضارة أو اختراق النظام.")
+                    st.info(f"💡 **تفاصيل التهديد الفني:** تم العثور على الأنماط التالية: {', '.join(detected_threats)}")
+                else:
+                    st.success("✅ **كود سليم ونظيف!** تم فحص بنية الأوامر البرمجية ولم يتم العثور على ثغرات أو أكواد تفتيش ضارة.")
+                    st.balloons()
+            else:
+                st.warning("الرجاء لصق الكود البرمجي أولاً!")
+
+# 2. قسم التحقق وفحص كلمة المرور
+with tab2:
+    st.markdown("<h3 style='color: #120e2e; font-weight: bold;'>🔍 مختبر قوة كلمات المرور</h3>", unsafe_allow_html=True)
+    password = st.text_input("ادخل الكلمة المراد فحصها:", type="password", key="panda_pwd", placeholder="اكتب كلمتك السرية هنا...")
     
     if password:
         score = 0
@@ -129,36 +172,31 @@ with tab1:
         if any(c in string.punctuation for c in password): score += 1
         
         if score <= 2:
-            st.error("🚨 وضعية الخطر! كلمة المرور ضعيفة جداً وسهلة التخمين. أسرع وأضف أرقاماً ورموزاً لحماية حسابك.")
+            st.error("🚨 وضعية الخطر! كلمة المرور ضعيفة جداً. أسرع وأضف أرقاماً ورموزاً.")
             st.progress(20)
         elif score <= 4:
-            st.warning("⚡ جيد ولكن! أمانك في المستوى المتوسط. أنت قريب جداً من الحماية الكاملة، أضف بعض الرموز.")
+            st.warning("⚡ جيد ولكن! أمانك في المستوى المتوسط. أضف بعض الرموز والحروف الكبيرة.")
             st.progress(60)
         else:
-            st.success("👑 بطل الحماية الخارق! حسابك آمن تماماً وجدار حمايتك صلب ومقاوم للاختراق.")
+            st.success("👑 بطل الحماية الخارق! حسابك آمن تماماً وجدار حمايتك صلب.")
             st.progress(100)
             st.balloons()
 
-# 2. قسم توليد كلمات المرور الآمنة
-with tab2:
-    st.markdown("<h3 style='color: #120e2e; font-weight: bold;'>🎲 مولد الرموز الآمنة</h3>", unsafe_allow_html=True)
-    st.write("إذا كانت كلمتك ضعيفة، دع مصنع الباندا يولد لك سلسلة أمان خارقة:")
-    
+# 3. قسم توليد كلمات المرور الآمنة
+with tab3:
+    st.markdown("<h3 style='color: #120e2e; font-weight: bold;'>🎲 مولد الرموز الآمنة الخارقة</h3>", unsafe_allow_html=True)
     length = st.slider("اختر طول كلمة المرور المطلوبة:", min_value=8, max_value=25, value=14)
     
     if st.button("🚀 اطلق درع الأمان الخاص بي"):
         characters = string.ascii_letters + string.digits + string.punctuation
         secure_token = "".join(random.choice(characters) for _ in range(length))
-        
-        st.markdown("<p style='color: #120e2e; font-weight: bold;'>درع الحماية الجاهز للاستخدام هو:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color: #120e2e; font-weight: bold;'>درع الحماية الجاهز هو:</p>", unsafe_allow_html=True)
         st.code(secure_token, language="")
         st.balloons()
 
-# 3. قسم تشفير وفك تشفير النصوص
-with tab3:
+# 4. قسم تشفير وفك تشفير النصوص
+with tab4:
     st.markdown("<h3 style='color: #120e2e; font-weight: bold;'>🕵️ آلة تشفير الرسائل الغامضة</h3>", unsafe_allow_html=True)
-    st.write("تعلم كيف يحمي الخبراء رسائلهم عبر الشبكة من خلال تشفيرها بلغة الباندا الغامضة:")
-    
     text_to_process = st.text_input("اكتب الرسالة التي تريد معالجتها وتأمينها:", placeholder="مثلاً: سر الأمان الرقمي")
     action = st.radio("حدد نوع الحركة السيبرانية:", ["تشفير وحجب النص 🔒", "كسر الشيفرة وإظهار النص 🔓"])
     
@@ -166,8 +204,7 @@ with tab3:
         if text_to_process:
             shift = 4
             result = "".join(chr(ord(char) + shift if "تشفير" in action else ord(char) - shift) for char in text_to_process)
-            
-            st.markdown("<p style='color: #120e2e; font-weight: bold;'>النتيجة المذهلة بعد المعالجة البرمجية:</p>", unsafe_allow_html=True)
+            st.markdown("<p style='color: #120e2e; font-weight: bold;'>النتيجة المذهلة:</p>", unsafe_allow_html=True)
             st.code(result, language="")
         else:
-            st.error("أوه! يبدو أنك نسيت كتابة النص المراد معالجته!")
+            st.error("أوه! يبدو أنك نسيت كتابة النص!")
