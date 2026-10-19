@@ -2,19 +2,17 @@ import streamlit as st
 import random
 import string
 import re
+import time
 
 # إعدادات المتصفح الأساسية
 st.set_page_config(page_title="منصة Panda Security التفاعلية", page_icon="🐼", layout="centered")
 
-# تخصيص واجهة المستخدم وإضافة الباندا في الخلفية مع تدرج الأخضر والوردي النيون
+# تخصيص واجهة المستخدم بتدرج نيون من الأخضر إلى الوردي (مضمون العمل بدون روابط خارجية)
 st.markdown("""
     <style>
-    /* خلفية متدرجة نيون مع دمج نمط الباندا الكرتوني المتكرر بشكل خفيف */
+    /* خلفية متدرجة نيون ممتعة وثابتة من الأخضر إلى الوردي */
     .stApp {
-        background: linear-gradient(135deg, rgba(0, 255, 204, 0.85) 0%, rgba(255, 0, 127, 0.85) 100%), 
-                    url('https://freepik.com') !important;
-        background-size: cover !important;
-        background-blend-mode: multiply !important;
+        background: linear-gradient(135deg, #00ffcc 0%, #ff007f 100%) !important;
     }
     
     /* تنسيق اسم المنصة الداكن لزيادة التباين والوضوح فوق التدرج الفاتح */
@@ -112,12 +110,16 @@ st.markdown("<h1>🐼 Panda Security 🐼</h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>منصة تفاعلية ممتعة ومرحة للتحقق من الأمان وفحص المخاطر السيبرانية</p>", unsafe_allow_html=True)
 
 # لوحة معلومات توضيحية شفافة
-st.markdown('<div style="background-color: rgba(18, 14, 46, 0.85); padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">👾 <b>مختبر الباندا السيبراني:</b> اختبر أمانك الآن ودع الباندا الذكي يحتفل بنجاحك!</div>', unsafe_allow_html=True)
+st.markdown('<div style="background-color: rgba(18, 14, 46, 0.85); padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">👾 <b>مختبر الباندا السيبراني:</b> اختبر أمانك الآن ودع نظام الباندا الذكي يحلل بياناتك الرقمية!</div>', unsafe_allow_html=True)
 
-# دالة لعرض الباندا المتحرك عند النجاح بصورة ظريفة
-def show_success_panda():
-    st.markdown("<center><img src='https://giphy.com' width='200'></center>", unsafe_allow_html=True)
+# دالة برمجية مضمونة ومرحة للاحتفال بالنجاح (تأثير الباندا الطائر والبالونات)
+def play_success_celebration():
     st.balloons()
+    # عرض رسالة ترحيبية ضخمة ومتحركة باستخدام الرموز التعبيرية المضمونة في المتصفح
+    with st.spinner("جاري معالجة احتفال الباندا السعيد... 🐼"):
+        time.sleep(0.5)
+    st.markdown("<h2 style='text-align: center; color: #120e2e;'>🐼 🎉 تـم الـنـجـاح بـأمـان! 🎉 🐼</h2>", unsafe_allow_html=True)
+    st.toast("الباندا يحييك على وعيك السيبراني الخارق! 🐼🛡️")
 
 # التبويبات التفاعلية الأربعة
 tab1, tab2, tab3, tab4 = st.tabs(["🛡️ فحص الروابط والأكواد", "🔍 فحص كلمات المرور", "🔑 مصنع الرموز", "🔒 نظام التشفير"])
@@ -138,7 +140,7 @@ with tab1:
                     st.error("🚨 تحذير عالي الخطورة! هذا الرابط يحمل مؤشرات تصيد احتيالي أو برمجيات خبيثة!")
                 else:
                     st.success("✅ الرابط يبدو آمناً ونظيفاً تماماً!")
-                    show_success_panda()
+                    play_success_celebration()
             else:
                 st.warning("الرجاء إدخال الرابط أولاً!")
                 
@@ -153,7 +155,7 @@ with tab1:
                     st.error(f"🚨 تم اكتشاف كود مشبوه! يحتوي الكود على أوامر قد تُستخدم لاختراق النظام.")
                 else:
                     st.success("✅ كود سليم ونظيف! تم فحص بنية الأوامر البرمجية بنجاح.")
-                    show_success_panda()
+                    play_success_celebration()
             else:
                 st.warning("الرجاء لصق الكود البرمجي أولاً!")
 
@@ -179,7 +181,7 @@ with tab2:
         else:
             st.success("👑 بطل الحماية الخارق! حسابك آمن تماماً وجدار حمايتك صلب.")
             st.progress(100)
-            show_success_panda()
+            play_success_celebration()
 
 # 3. قسم توليد كلمات المرور الآمنة
 with tab3:
@@ -191,7 +193,7 @@ with tab3:
         secure_token = "".join(random.choice(characters) for _ in range(length))
         st.markdown("<p style='color: #120e2e; font-weight: bold;'>درع الحماية الجاهز هو:</p>", unsafe_allow_html=True)
         st.code(secure_token, language="")
-        show_success_panda()
+        play_success_celebration()
 
 # 4. قسم تشفير وفك تشفير النصوص
 with tab4:
@@ -205,6 +207,6 @@ with tab4:
             result = "".join(chr(ord(char) + shift if "تشفير" in action else ord(char) - shift) for char in text_to_process)
             st.markdown("<p style='color: #120e2e; font-weight: bold;'>النتيجة المذهلة:</p>", unsafe_allow_html=True)
             st.code(result, language="")
-            show_success_panda()
+            play_success_celebration()
         else:
             st.error("أوه! يبدو أنك نسيت كتابة النص!")
