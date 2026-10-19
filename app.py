@@ -3,98 +3,113 @@ import random
 import string
 
 # إعدادات المتصفح الأساسية
-st.set_page_config(page_title="منصة التدقيق والتحقق السيبراني", page_icon="🛡️", layout="centered")
+st.set_page_config(page_title="منصة التفتيش والأمن الرقمي - Panda Security", page_icon="🐼", layout="centered")
 
-# تخصيص واجهة المستخدم بالألوان المتناسقة لتقليل الإيموجيز وزيادة التباين
+# تخصيص واجهة المستخدم بألوان نيون وخلفية متناسقة وممتعة ومرحة للمرحلة المتوسطة
 st.markdown("""
     <style>
-    /* تغيير لون خلفية التطبيق بالكامل إلى تدرج أزرق داكن محايد */
+    /* خلفية متناسقة ممتعة ومريحة بتدرج داكن ليبرز ألوان النيون */
     .stApp {
-        background: linear-gradient(135deg, #0a1128 0%, #101f42 100%);
+        background: linear-gradient(135deg, #120e2e 0%, #1a1540 100%);
     }
     
-    /* تنسيق العنوان الرئيسي المتخصص */
+    /* تنسيق اسم المنصة الجديد Panda Security بخط عريض ونوافذ نيون متوهجة */
     h1 {
-        color: #00d2ff !important;
+        color: #00ffcc !important;
         text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-weight: 700;
-        text-shadow: 0px 0px 12px rgba(0, 210, 255, 0.3);
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-weight: bold;
+        font-size: 40px !important;
+        text-shadow: 0px 0px 15px #00ffcc, 0px 0px 30px #ff007f;
         margin-bottom: 5px;
     }
     
-    /* تنسيق التبويبات العلوية */
+    /* تنسيق الوصف الفرعي */
+    .subtitle {
+        text-align: center; 
+        color: #ff007f; 
+        font-size: 18px; 
+        font-weight: bold;
+        text-shadow: 0px 0px 8px rgba(255, 0, 127, 0.4);
+        margin-bottom: 25px;
+    }
+    
+    /* تنسيق التبويبات العلوية بألوان ممتعة */
     .stTabs [data-baseweb="tab"] {
-        color: #8a99ad;
-        font-size: 16px;
-        font-weight: 600;
-        background-color: #132247;
-        border-radius: 8px 8px 0px 0px;
-        padding: 10px 20px;
-        margin: 0px 4px;
-        border: 1px solid #1c356a;
+        color: #00ffcc;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #1f1a4d;
+        border-radius: 12px 12px 0px 0px;
+        padding: 12px 24px;
+        margin: 0px 6px;
+        border: 1px solid #2d2673;
     }
     
     .stTabs [data-baseweb="tab"]:hover {
-        color: #00d2ff;
+        color: #ff007f;
+        text-shadow: 0px 0px 10px #ff007f;
     }
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background-color: #00d2ff !important;
-        color: #0a1128 !important;
+        background: linear-gradient(45deg, #ff007f, #7928ca) !important;
+        color: white !important;
+        box-shadow: 0px 0px 15px rgba(255, 0, 127, 0.6);
     }
     
-    /* تنسيق خانات الإدخال لزيادة التباين والتناسق */
-    div[data-baseweb="input"] {
-        background-color: #132247 !important;
-        border: 1px solid #1c356a !important;
-        border-radius: 8px;
-    }
-    
-    input {
-        color: #ffffff !important;
-    }
-    
-    /* تنسيق أزرار الفحص والتحقق */
+    /* تنسيق أزرار الفحص والتحقق النيون التفاعلية */
     div.stButton > button:first-child {
-        background: linear-gradient(45deg, #00d2ff, #0072ff);
-        color: #ffffff;
+        background: linear-gradient(45deg, #00ffcc, #0099ff);
+        color: #000000;
         font-weight: bold;
-        font-size: 16px;
-        border-radius: 8px;
+        font-size: 18px;
+        border-radius: 15px;
         border: none;
         padding: 12px 30px;
-        box-shadow: 0px 4px 15px rgba(0, 114, 255, 0.3);
+        box-shadow: 0px 0px 15px #00ffcc;
         transition: 0.3s;
         width: 100%;
     }
     
     div.stButton > button:first-child:hover {
-        background: linear-gradient(45deg, #0072ff, #00d2ff);
-        box-shadow: 0px 4px 20px rgba(0, 210, 255, 0.5);
+        background: linear-gradient(45deg, #ff007f, #00ffcc);
+        color: #ffffff;
+        transform: scale(1.03);
+        box-shadow: 0px 0px 25px #ff007f;
+    }
+    
+    /* تنسيق حقول الإدخال لتتناسق مع الثيم الممتع */
+    div[data-baseweb="input"] {
+        background-color: #1f1a4d !important;
+        border: 2px solid #2d2673 !important;
+        border-radius: 12px;
+    }
+    
+    input {
+        color: #ffffff !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# واجهة المنصة الرئيسية
-st.markdown("<h1>منصة التدقيق والتحقق السيبراني</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #8a99ad; font-size: 16px;'>أنظمة ذكية تفاعلية لفحص مستوى الأمان والتحقق من سلامة البيانات الرقمية للمرحلة المتوسطة</p>", unsafe_allow_html=True)
+# واجهة تطبيق Panda Security الرئيسية
+st.markdown("<h1>🐼 Panda Security 🐼</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>بوابتك التفاعلية الممتعة للتحقق من الأمان وفحص البيانات الرقمية</p>", unsafe_allow_html=True)
 
-# لوحة معلومات مركزية
-st.info("مرحباً بك في نظام الفحص. استخدم التبويبات المتاحة بالأسفل لإجراء اختبارات الأمان والتحقق من أدوات الحماية الخاصة بك.")
+# رسالة ترحيبية حماسية
+st.info("👾 **مرحباً بك في نظام الفحص والتحقق!** نحن هنا لنساعدك على حماية حساباتك ومعلوماتك من الأشرار الرقميين بطريقة تفاعلية وممتعة ومستعدين لإطلاق بالونات الأمان!")
 
-# إنشاء تبويبات الفحص المتخصصة
-tab1, tab2, tab3 = st.tabs(["فحص أمان كلمة المرور", "أداة التوليد الآمن", "نظام تشفير البيانات"])
+# التبويبات التفاعلية للتحقق من الأمان
+tab1, tab2, tab3 = st.tabs(["🔍 فحص أمان كلمات المرور", "🔑 مصنع الرموز القوية", "🔒 نظام تشفير البيانات"])
 
-# 1. نظام فحص وتحليل مستوى أمان كلمة المرور
+# 1. قسم التحقق وفحص كلمة المرور
 with tab1:
-    st.markdown("<h3 style='color: #00d2ff; margin-top: 15px;'>وحدة فحص وقوة الحسابات</h3>", unsafe_allow_html=True)
-    st.write("أدخل كلمة المرور في الحقل أدناه ليقوم النظام بتحليلها والتحقق من مدى صمودها ضد هجمات التخمين السيبرانية:")
+    st.markdown("<h3 style='color: #00ffcc; margin-top: 15px;'>🛡️ مختبر القوة وتحليل الحسابات</h3>", unsafe_allow_html=True)
+    st.write("اكتب كلمة مرور هنا ودع نظام التحقق يقيس مستوى حمايتها:")
     
-    password = st.text_input("كلمة المرور المراد فحصها:", type="password", key="secure_inspect_pwd", placeholder="أدخل الكلمة هنا للبدء في التحليل...")
+    password = st.text_input("ادخل الكلمة المراد فحصها:", type="password", key="panda_pwd", placeholder="اكتب كلمتك السرية هنا...")
     
     if password:
-        # خوارزمية قياس معايير الأمان
+        # حساب معايير الأمان وقوتها
         score = 0
         if len(password) >= 8: score += 1
         if len(password) >= 12: score += 1
@@ -102,47 +117,47 @@ with tab1:
         if any(c.isdigit() for c in password): score += 1
         if any(c in string.punctuation for c in password): score += 1
         
-        # استجابة النظام بناءً على التحليل الرقمي
+        # ردود فعل ملونة ومرحة حسب النتيجة
         if score <= 2:
-            st.error("النتيجة: غير آمنة مخترقة برمجياً. كلمة المرور ضعيفة للغاية وسهلة التخمين.")
+            st.error("🚨 **وضعية الخطر!** كلمة المرور ضعيفة جداً وسهلة التخمين. أسرع وأضف أرقاماً ورموزاً لحماية حسابك.")
             st.progress(20)
         elif score <= 4:
-            st.warning("النتيجة: أمان متوسط. الخصائص جيدة ولكن يفضل تدعيمها برموز إضافية وحروف كبيرة لحماية أقوى.")
+            st.warning("⚡ **جيد ولكن!** أمانك في المستوى المتوسط. أنت قريب جداً من الحماية الكاملة، أضف بعض الرموز لتصبح بطلاً سيبرانياً.")
             st.progress(60)
         else:
-            st.success("النتيجة: أمان عالي جدار حماية قوي ومقاوم لمحاولات الاختراق الرقمي.")
+            st.success("👑 **بطل الحماية الخارق!** حسابك آمن تماماً وجدار حمايتك صلب ومقاوم للاختراق.")
             st.progress(100)
-            st.balloons()  # تأثير تفاعلي للاحتفال بتحقيق معايير الأمان الكاملة
+            st.balloons()  # إطلاق مؤثر البالونات الاحتفالي التفاعلي
 
-# 2. وحدة توليد الرموز العشوائية المشفرة
+# 2. قسم توليد كلمات المرور الآمنة
 with tab2:
-    st.markdown("<h3 style='color: #00d2ff; margin-top: 15px;'>وحدة توليد معايير الحماية المعقدة</h3>", unsafe_allow_html=True)
-    st.write("إذا كانت كلمتك الحالية ضعيفة، يمكنك استخدام هذا النظام لإنشاء سلسلة نصية عشوائية مطابقة لمعايير الأمن السيبراني العالمي:")
+    st.markdown("<h3 style='color: #00ffcc; margin-top: 15px;'>🎲 مولد الرموز الآمنة</h3>", unsafe_allow_html=True)
+    st.write("إذا كانت كلمتك ضعيفة، دع مصنع الباندا يولد لك سلسلة أمان خارقة مستحيلة الاختراق:")
     
-    length = st.slider("حدد عدد خانات الطول المطلوبة للتحقق:", min_value=8, max_value=25, value=14)
+    length = st.slider("اختر طول كلمة المرور المطلوبة:", min_value=8, max_value=25, value=14)
     
-    if st.button("بدء توليد السلسلة الآمنة"):
+    if st.button("🚀 اطلق درع الأمان الخاص بي"):
         characters = string.ascii_letters + string.digits + string.punctuation
         secure_token = "".join(random.choice(characters) for _ in range(length))
         
-        st.markdown("<p style='color: #00d2ff; font-weight: 600;'>تم إنشاء الرمز بنجاح وفقاً لمعايير الفحص:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color: #ff007f; font-weight: bold;'>درع الحماية الجاهز للاستخدام هو:</p>", unsafe_allow_html=True)
         st.code(secure_token, language="")
         st.balloons()
 
-# 3. نظام محاكاة تشفير وفك تشفير الرسائل
+# 3. قسم تشفير وفك تشفير النصوص
 with tab3:
-    st.markdown("<h3 style='color: #00d2ff; margin-top: 15px;'>نظام تشفير وحماية سلامة النصوص</h3>", unsafe_allow_html=True)
-    st.write("تساعد هذه الأداة على فهم كيفية حماية البيانات أثناء انتقالها عبر الشبكة باستخدام خوارزميات الإزاحة الرياضية:")
+    st.markdown("<h3 style='color: #00ffcc; margin-top: 15px;'>🕵️ آلة تشفير الرسائل الغامضة</h3>", unsafe_allow_html=True)
+    st.write("تعلم كيف يحمي الخبراء رسائلهم عبر الشبكة من خلال تشفيرها بلغة الباندا الغامضة:")
     
-    text_to_process = st.text_input("أدخل النص المطلوب معالجته سيبرانياً:", placeholder="اكتب النص المراد حمايته هنا...")
-    action = st.radio("حدد نوع الإجراء المطلوب:", ["تشفير وحجب النص", "فك التشفير وإظهار النص"])
+    text_to_process = st.text_input("اكتب الرسالة التي تريد معالجتها وتأمينها:", placeholder="مثلاً: سر الأمان الرقمي")
+    action = st.radio("حدد نوع الحركة السيبرانية:", ["تشفير وحجب النص 🔒", "كسر الشيفرة وإظهار النص 🔓"])
     
-    if st.button("معالجة البيانات"):
+    if st.button("✨ تشغيل آلة المعالجة"):
         if text_to_process:
             shift = 4
             result = "".join(chr(ord(char) + shift if "تشفير" in action else ord(char) - shift) for char in text_to_process)
             
-            st.markdown("<p style='color: #00d2ff; font-weight: 600;'>مخرجات النظام بعد المعالجة البرمجية:</p>", unsafe_allow_html=True)
+            st.markdown("<p style='color: #00ffcc; font-weight: bold;'>النتيجة المذهلة بعد المعالجة البرمجية:</p>", unsafe_allow_html=True)
             st.code(result, language="")
         else:
-            st.error("فشل الإجراء: حقل النص فارغ. يرجى كتابة البيانات أولاً.")
+            st.error("أوه! يبدو أنك نسيت كتابة النص المراد معالجته!")
