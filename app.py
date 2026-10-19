@@ -7,41 +7,23 @@ import time
 # إعدادات المتصفح الأساسية
 st.set_page_config(page_title="منصة Panda Security التفاعلية", page_icon="🐼", layout="centered")
 
-# تخصيص واجهة المستخدم برسم نيون للباندا في الخلفية مع تدرج الأخضر والوردي
+# تخصيص واجهة المستخدم بتدرج نيون من الأخضر إلى الوردي (مضمون العمل بدون روابط خارجية)
 st.markdown("""
     <style>
-    /* تصميم خلفية متدرجة نيون مدمج معها رسمة باندا نيون متوهجة برمجياً */
+    /* خلفية متدرجة نيون ممتعة وثابتة من الأخضر إلى الوردي */
     .stApp {
-        background: linear-gradient(135deg, rgba(0, 255, 204, 0.9) 0%, rgba(255, 0, 127, 0.9) 100%),
-                    radial-gradient(circle at 50% 30%, #00ffcc 0%, transparent 60%) !important;
-        position: relative;
-    }
-
-    /* إضافة تأثير نيون للباندا يظهر بشكل فني في خلفية المنصة */
-    .stApp::before {
-        content: "🐼";
-        position: fixed;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -20%);
-        font-size: 180px;
-        opacity: 0.15;
-        filter: drop-shadow(0 0 20px #00ffcc) drop-shadow(0 0 40px #ff007f);
-        z-index: 0;
-        pointer-events: none;
+        background: linear-gradient(135deg, #00ffcc 0%, #ff007f 100%) !important;
     }
     
-    /* تنسيق اسم المنصة الداكن لزيادة التباين مع توهج نيون مزدوج */
+    /* تنسيق اسم المنصة الداكن لزيادة التباين والوضوح فوق التدرج الفاتح */
     h1 {
         color: #120e2e !important;
         text-align: center;
         font-family: 'Comic Sans MS', cursive, sans-serif;
         font-weight: bold;
-        font-size: 48px !important;
-        text-shadow: 0px 0px 10px #00ffcc, 0px 0px 20px #ff007f;
+        font-size: 45px !important;
+        text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6);
         margin-bottom: 5px;
-        position: relative;
-        z-index: 1;
     }
     
     /* تنسيق الوصف الفرعي */
@@ -50,59 +32,49 @@ st.markdown("""
         color: #ffffff; 
         font-size: 19px; 
         font-weight: bold;
-        text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+        text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
         margin-bottom: 25px;
-        position: relative;
-        z-index: 1;
     }
     
-    /* تنسيق التبويبات العلوية لتبرز بوضوح نيون ممتع فوق الخلفية */
+    /* تنسيق التبويبات العلوية لتبرز بوضوح ممتع */
     .stTabs [data-baseweb="tab"] {
         color: #ffffff;
         font-size: 16px;
         font-weight: bold;
-        background-color: rgba(18, 14, 46, 0.9);
+        background-color: rgba(18, 14, 46, 0.85);
         border-radius: 12px 12px 0px 0px;
         padding: 10px 18px;
         margin: 0px 3px;
-        border: 2px solid rgba(0, 255, 204, 0.3);
-        position: relative;
-        z-index: 1;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .stTabs [data-baseweb="tab"]:hover {
         color: #00ffcc;
-        text-shadow: 0px 0px 10px #00ffcc;
     }
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
         background-color: #120e2e !important;
         color: #00ffcc !important;
-        box-shadow: 0px 4px 15px rgba(0, 255, 204, 0.4);
-        border: 2px solid #00ffcc;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     }
     
-    /* تنسيق حقول الإدخال لتكون واضحة ومحاطة بإطار نيون متوهج */
+    /* تنسيق حقول الإدخال لتكون واضحة وداكنة ومتباينة */
     div[data-baseweb="input"], div[data-baseweb="textarea"] {
-        background-color: rgba(18, 14, 46, 0.95) !important;
+        background-color: rgba(18, 14, 46, 0.9) !important;
         border: 2px solid #120e2e !important;
         border-radius: 12px;
-        box-shadow: inset 0 0 10px rgba(255, 0, 127, 0.2);
     }
     
     input, textarea {
-        color: #00ffcc !important;
-        font-family: monospace;
-        font-weight: bold;
+        color: #ffffff !important;
     }
     
     /* تنسيق الخانات والبطاقات الداخلية */
     .stSelectbox, .stRadio {
-        background-color: rgba(18, 14, 46, 0.9) !important;
+        background-color: rgba(18, 14, 46, 0.85) !important;
         padding: 15px;
         border-radius: 12px;
         color: #ffffff !important;
-        border: 1px solid rgba(255, 0, 127, 0.2);
     }
     
     label {
@@ -110,7 +82,7 @@ st.markdown("""
         font-weight: bold !important;
     }
     
-    /* تنسيق أزرار الفحص النيون التفاعلية فائقة التوهج */
+    /* تنسيق أزرار الفحص النيون التفاعلية */
     div.stButton > button:first-child {
         background: linear-gradient(45deg, #120e2e, #1a1540);
         color: #00ffcc;
@@ -119,7 +91,7 @@ st.markdown("""
         border-radius: 15px;
         border: 2px solid #00ffcc;
         padding: 12px 30px;
-        box-shadow: 0px 4px 20px rgba(0, 255, 204, 0.4);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
         transition: 0.3s;
         width: 100%;
     }
@@ -128,25 +100,26 @@ st.markdown("""
         background: #00ffcc;
         color: #120e2e;
         transform: scale(1.02);
-        box-shadow: 0px 0px 25px #00ffcc, 0px 0px 10px #ff007f;
+        box-shadow: 0px 0px 20px #00ffcc;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # واجهة تطبيق Panda Security الرئيسية
 st.markdown("<h1>🐼 Panda Security 🐼</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>منصة تفاعلية ممتعة ومرحة بنبض النيون لفحص المخاطر والتحقق من الأمان</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>منصة تفاعلية ممتعة ومرحة للتحقق من الأمان وفحص المخاطر السيبرانية</p>", unsafe_allow_html=True)
 
 # لوحة معلومات توضيحية شفافة
-st.markdown('<div style="background-color: rgba(18, 14, 46, 0.9); padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px; border-left: 5px solid #00ffcc;">👾 <b>مختبر الباندا السيبراني:</b> دمجنا لك تفاصيل النيون المتوهجة لحماية وفحص بياناتك الرقمية بأسلوب الهاكرز المحترفين!</div>', unsafe_allow_html=True)
+st.markdown('<div style="background-color: rgba(18, 14, 46, 0.85); padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px;">👾 <b>مختبر الباندا السيبراني:</b> اختبر أمانك الآن ودع نظام الباندا الذكي يحلل بياناتك الرقمية!</div>', unsafe_allow_html=True)
 
-# دالة برمجية مضمونة للاحتفال بنجاح الفحص
+# دالة برمجية مضمونة ومرحة للاحتفال بالنجاح (تأثير الباندا الطائر والبالونات)
 def play_success_celebration():
     st.balloons()
-    with st.spinner("الباندا يحلل النتيجة... 🐼⚡"):
-        time.sleep(0.4)
-    st.markdown("<h2 style='text-align: center; color: #120e2e; text-shadow: 0 0 10px #00ffcc;'>🐼 ✨ تـم التحقـق بـدرع نـيـون آمـن! ✨ 🐼</h2>", unsafe_allow_html=True)
-    st.toast("بطل خارق! وعيك السيبراني يضيء كالأخضر الفسفوري! 🐼🛡️")
+    # عرض رسالة ترحيبية ضخمة ومتحركة باستخدام الرموز التعبيرية المضمونة في المتصفح
+    with st.spinner("جاري معالجة احتفال الباندا السعيد... 🐼"):
+        time.sleep(0.5)
+    st.markdown("<h2 style='text-align: center; color: #120e2e;'>🐼 🎉 تـم الـنـجـاح بـأمـان! 🎉 🐼</h2>", unsafe_allow_html=True)
+    st.toast("الباندا يحييك على وعيك السيبراني الخارق! 🐼🛡️")
 
 # التبويبات التفاعلية الأربعة
 tab1, tab2, tab3, tab4 = st.tabs(["🛡️ فحص الروابط والأكواد", "🔍 فحص كلمات المرور", "🔑 مصنع الرموز", "🔒 نظام التشفير"])
