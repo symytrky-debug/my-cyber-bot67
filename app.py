@@ -2,74 +2,99 @@ import streamlit as st
 import random
 import string
 
-# إعدادات الصفحة
-st.set_page_config(page_title="مخيم الحماية السيبرانية الرقمي", page_icon="🚀", layout="centered")
+# إعدادات المتصفح الأساسية
+st.set_page_config(page_title="منصة التدقيق والتحقق السيبراني", page_icon="🛡️", layout="centered")
 
-# تصميم الألوان الممتعة والخلفية باستخدام CSS مخصص للمرحلة المتوسطة
+# تخصيص واجهة المستخدم بالألوان المتناسقة لتقليل الإيموجيز وزيادة التباين
 st.markdown("""
     <style>
-    .main {
-        background: linear-gradient(135deg, #1e1e2f 0%, #251c3d 100%);
+    /* تغيير لون خلفية التطبيق بالكامل إلى تدرج أزرق داكن محايد */
+    .stApp {
+        background: linear-gradient(135deg, #0a1128 0%, #101f42 100%);
     }
+    
+    /* تنسيق العنوان الرئيسي المتخصص */
     h1 {
-        color: #ff007f !important;
+        color: #00d2ff !important;
         text-align: center;
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        text-shadow: 2px 2px 10px rgba(255, 0, 127, 0.5);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 700;
+        text-shadow: 0px 0px 12px rgba(0, 210, 255, 0.3);
+        margin-bottom: 5px;
     }
+    
+    /* تنسيق التبويبات العلوية */
     .stTabs [data-baseweb="tab"] {
-        color: #00d2ff;
-        font-size: 18px;
-        font-weight: bold;
-        background-color: #1a1a2e;
-        border-radius: 10px 10px 0px 0px;
+        color: #8a99ad;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #132247;
+        border-radius: 8px 8px 0px 0px;
         padding: 10px 20px;
         margin: 0px 4px;
+        border: 1px solid #1c356a;
     }
+    
     .stTabs [data-baseweb="tab"]:hover {
-        color: #ff007f;
+        color: #00d2ff;
     }
+    
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background-color: #ff007f !important;
-        color: white !important;
+        background-color: #00d2ff !important;
+        color: #0a1128 !important;
     }
+    
+    /* تنسيق خانات الإدخال لزيادة التباين والتناسق */
+    div[data-baseweb="input"] {
+        background-color: #132247 !important;
+        border: 1px solid #1c356a !important;
+        border-radius: 8px;
+    }
+    
+    input {
+        color: #ffffff !important;
+    }
+    
+    /* تنسيق أزرار الفحص والتحقق */
     div.stButton > button:first-child {
-        background: linear-gradient(45deg, #00ffcc, #0099ff);
-        color: #000;
+        background: linear-gradient(45deg, #00d2ff, #0072ff);
+        color: #ffffff;
         font-weight: bold;
-        font-size: 18px;
-        border-radius: 20px;
+        font-size: 16px;
+        border-radius: 8px;
         border: none;
-        padding: 10px 30px;
-        box-shadow: 0px 4px 15px rgba(0, 255, 204, 0.4);
+        padding: 12px 30px;
+        box-shadow: 0px 4px 15px rgba(0, 114, 255, 0.3);
         transition: 0.3s;
+        width: 100%;
     }
+    
     div.stButton > button:first-child:hover {
-        background: linear-gradient(45deg, #0099ff, #00ffcc);
-        transform: scale(1.05);
+        background: linear-gradient(45deg, #0072ff, #00d2ff);
+        box-shadow: 0px 4px 20px rgba(0, 210, 255, 0.5);
     }
     </style>
 """, unsafe_allow_html=True)
 
-# العنوان الرئيسي الملون
-st.markdown("<h1>🎮🎮 منصة الأبطال السيبرانيين 🎮🎮</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #00ffcc; font-size: 20px; font-weight: bold;'>اكتشف أسرار الهاكرز الأخلاقيين وحصّن بياناتك بنقرة زر!</p>", unsafe_allow_html=True)
+# واجهة المنصة الرئيسية
+st.markdown("<h1>منصة التدقيق والتحقق السيبراني</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #8a99ad; font-size: 16px;'>أنظمة ذكية تفاعلية لفحص مستوى الأمان والتحقق من سلامة البيانات الرقمية للمرحلة المتوسطة</p>", unsafe_allow_html=True)
 
-# بطاقة ترحيبية كرتونية ممتعة
-st.info("👾 **مرحباً بك يا بطل!** الأمن السيبراني هو قوتك الخارقة لحماية أجهزتك وحساباتك من الأشرار الرقميين على الإنترنت. هل أنت مستعد للتحدي؟")
+# لوحة معلومات مركزية
+st.info("مرحباً بك في نظام الفحص. استخدم التبويبات المتاحة بالأسفل لإجراء اختبارات الأمان والتحقق من أدوات الحماية الخاصة بك.")
 
-# تبويبات تفاعلية ملونة
-tab1, tab2, tab3 = st.tabs(["⚡ فاحص كلمات المرور السرية", "🎲 مولّد الرموز الخارقة", "🔐 شيفرة الرسائل الغامضة"])
+# إنشاء تبويبات الفحص المتخصصة
+tab1, tab2, tab3 = st.tabs(["فحص أمان كلمة المرور", "أداة التوليد الآمن", "نظام تشفير البيانات"])
 
-# 1. تحدي وفحص قوة كلمة المرور
+# 1. نظام فحص وتحليل مستوى أمان كلمة المرور
 with tab1:
-    st.markdown("<h3 style='color: #00ffcc;'>🔍 مختبر القوة الرقمي</h3>", unsafe_allow_html=True)
-    st.write("اكتب كلمة مرورك السرية وشاهد المؤشر الملون كيف يتفاعل مع قوتها!")
+    st.markdown("<h3 style='color: #00d2ff; margin-top: 15px;'>وحدة فحص وقوة الحسابات</h3>", unsafe_allow_html=True)
+    st.write("أدخل كلمة المرور في الحقل أدناه ليقوم النظام بتحليلها والتحقق من مدى صمودها ضد هجمات التخمين السيبرانية:")
     
-    password = st.text_input("جرب كلمة مرور هنا:", type="password", key="fun_pwd", placeholder="اكتب هنا مثلاً: Cyber@2026")
+    password = st.text_input("كلمة المرور المراد فحصها:", type="password", key="secure_inspect_pwd", placeholder="أدخل الكلمة هنا للبدء في التحليل...")
     
     if password:
-        # حساب النقاط بطريقة برمجية مرحة
+        # خوارزمية قياس معايير الأمان
         score = 0
         if len(password) >= 8: score += 1
         if len(password) >= 12: score += 1
@@ -77,47 +102,47 @@ with tab1:
         if any(c.isdigit() for c in password): score += 1
         if any(c in string.punctuation for c in password): score += 1
         
-        # تغيير الألوان والرسائل بناءً على النتيجة لتكون حماسية وممتعة
+        # استجابة النظام بناءً على التحليل الرقمي
         if score <= 2:
-            st.error("🚨 **وضعية الخطر!** كلمة مرورك ضعيفة جداً ويمكن للهاكرز تخمينها في ثوانٍ! أضف رموزاً وأرقاماً فوراً.")
+            st.error("النتيجة: غير آمنة مخترقة برمجياً. كلمة المرور ضعيفة للغاية وسهلة التخمين.")
             st.progress(20)
         elif score <= 4:
-            st.warning("⚡ **جيد ولكن!** حمايتك متوسطة. أنت في طريقك لتصبح بطلاً، لكن أضف بعض الحروف الكبيرة لتجعلها أقوى.")
+            st.warning("النتيجة: أمان متوسط. الخصائص جيدة ولكن يفضل تدعيمها برموز إضافية وحروف كبيرة لحماية أقوى.")
             st.progress(60)
         else:
-            st.success("👑 **مستوى الملك الخارق!** كلمة مرورك أسطورية ومستحيلة الاختراق!")
+            st.success("النتيجة: أمان عالي جدار حماية قوي ومقاوم لمحاولات الاختراق الرقمي.")
             st.progress(100)
-            st.balloons() # إطلاق بالونات احتفالية عند النجاح الكامل!
+            st.balloons()  # تأثير تفاعلي للاحتفال بتحقيق معايير الأمان الكاملة
 
-# 2. مولد كلمات المرور الممتع
+# 2. وحدة توليد الرموز العشوائية المشفرة
 with tab2:
-    st.markdown("<h3 style='color: #00ffcc;'>🎲 مصنع الرموز الحصينة</h3>", unsafe_allow_html=True)
-    st.write("اختر طول رداء الحماية الخاص بك ودعنا نطلق لك رمزاً غير قابل للكسر!")
+    st.markdown("<h3 style='color: #00d2ff; margin-top: 15px;'>وحدة توليد معايير الحماية المعقدة</h3>", unsafe_allow_html=True)
+    st.write("إذا كانت كلمتك الحالية ضعيفة، يمكنك استخدام هذا النظام لإنشاء سلسلة نصية عشوائية مطابقة لمعايير الأمن السيبراني العالمي:")
     
-    length = st.slider("اختر مستوى تعقيد الطول:", min_value=8, max_value=25, value=14)
+    length = st.slider("حدد عدد خانات الطول المطلوبة للتحقق:", min_value=8, max_value=25, value=14)
     
-    if st.button("🚀 توليد درع الحماية"):
+    if st.button("بدء توليد السلسلة الآمنة"):
         characters = string.ascii_letters + string.digits + string.punctuation
-        generated_password = "".join(random.choice(characters) for _ in range(length))
+        secure_token = "".join(random.choice(characters) for _ in range(length))
         
-        st.markdown("<p style='color: #ff007f; font-weight: bold;'>درعك السري الجاهز للاستخدام هو:</p>", unsafe_allow_html=True)
-        st.code(generated_password, language="")
+        st.markdown("<p style='color: #00d2ff; font-weight: 600;'>تم إنشاء الرمز بنجاح وفقاً لمعايير الفحص:</p>", unsafe_allow_html=True)
+        st.code(secure_token, language="")
         st.balloons()
 
-# 3. صندوق التشفير السري الممتع
+# 3. نظام محاكاة تشفير وفك تشفير الرسائل
 with tab3:
-    st.markdown("<h3 style='color: #00ffcc;'>🕵️ كاشف الرسائل والمخبر السري</h3>", unsafe_allow_html=True)
-    st.write("اكتب رسالة سرية لأصدقائك وقم بتشفيرها بلغة الهاكرز الغامضة لكي لا يفهمها أحد غيركم!")
+    st.markdown("<h3 style='color: #00d2ff; margin-top: 15px;'>نظام تشفير وحماية سلامة النصوص</h3>", unsafe_allow_html=True)
+    st.write("تساعد هذه الأداة على فهم كيفية حماية البيانات أثناء انتقالها عبر الشبكة باستخدام خوارزميات الإزاحة الرياضية:")
     
-    text_to_process = st.text_input("اكتب رسالتك السرية هنا:", placeholder="مثلاً: التقي بكم في معمل الحاسب")
-    action = st.radio("اختر الحركة السيبرانية:", ["تشفير القفل 🔒", "كسر الشيفرة وفك القفل 🔓"])
+    text_to_process = st.text_input("أدخل النص المطلوب معالجته سيبرانياً:", placeholder="اكتب النص المراد حمايته هنا...")
+    action = st.radio("حدد نوع الإجراء المطلوب:", ["تشفير وحجب النص", "فك التشفير وإظهار النص"])
     
-    if st.button("✨ تشغيل آلة التشفير"):
+    if st.button("معالجة البيانات"):
         if text_to_process:
-            shift = 4  # إزاحة الأحرف والرموز بطريقة ممتعة
+            shift = 4
             result = "".join(chr(ord(char) + shift if "تشفير" in action else ord(char) - shift) for char in text_to_process)
             
-            st.markdown("<p style='color: #00ffcc; font-weight: bold;'>النتيجة المذهلة:</p>", unsafe_allow_html=True)
+            st.markdown("<p style='color: #00d2ff; font-weight: 600;'>مخرجات النظام بعد المعالجة البرمجية:</p>", unsafe_allow_html=True)
             st.code(result, language="")
         else:
-            st.error("أوه! لقد نسيت كتابة الرسالة المراد تشفيرها!")
+            st.error("فشل الإجراء: حقل النص فارغ. يرجى كتابة البيانات أولاً.")
